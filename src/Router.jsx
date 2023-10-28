@@ -8,8 +8,12 @@ import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
+import { createContext, useState } from "react";
+
+export const ShoppingCartContext = createContext();
 
 export default function Router() {
+  const [shoppingCart, setShoppingCart] = useState([]);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -29,7 +33,13 @@ export default function Router() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <ShoppingCartContext.Provider value={{ shoppingCart, setShoppingCart }}>
+        <RouterProvider router={router} />
+      </ShoppingCartContext.Provider>
+    </>
+  );
 }
 
 const MainLayout = () => {

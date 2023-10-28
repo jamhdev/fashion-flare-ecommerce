@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Itim&family=Oswald:wght@500&family=Short+Stack&family=Work+Sans:wght@300;400&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
