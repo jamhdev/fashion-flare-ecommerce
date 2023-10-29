@@ -2,24 +2,76 @@ import React, { useContext } from "react";
 import { ShoppingCartContext } from "../Router";
 
 export default function Cart() {
-  const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
+  const {
+    shoppingCart,
+    setShoppingCart,
+    addShoppingCartItem,
+    removeShoppingCartItem,
+    subTotal,
+  } = useContext(ShoppingCartContext);
 
   const shoppingCartData = shoppingCart.map((value, index) => {
     return (
       <React.Fragment key={index}>
-        <div className="m-2 rounded-lg border-2 border-red-300 p-2">
-          {value}
+        <div className="m-auto flex max-w-2xl rounded-lg p-2 font-poppins shadow-md">
+          <img
+            src={value.image}
+            alt="Item Image"
+            className="max-h-20 object-contain"
+          />
+
+          <div className="flex flex-grow flex-col pl-2">
+            <div className="text-left">{value.title}</div>
+            <div className="flex justify-between">
+              <div className="flex">
+                <img
+                  src="/images/icons/minus-icon.png"
+                  alt="Minus One"
+                  className="w-5 object-contain transition-all hover:scale-110 hover:cursor-pointer"
+                  onClick={() => {
+                    removeShoppingCartItem(
+                      value.id,
+                      value.title,
+                      value.price,
+                      value.image
+                    );
+                  }}
+                />
+                <div className="ml-1 mr-1">Qty: {value.quantity}</div>
+                <img
+                  src="/images/icons/plus-icon.png"
+                  alt="Plus One"
+                  className="w-5 object-contain transition-all hover:scale-110 hover:cursor-pointer"
+                  onClick={() => {
+                    addShoppingCartItem(
+                      value.id,
+                      value.title,
+                      value.price,
+                      value.image
+                    );
+                  }}
+                />
+              </div>
+              <div>${value.price * value.quantity}</div>
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );
   });
 
   return (
-    <div className="min-h-screen bg-gray-400 text-center">
+    <div className="min-h-screen bg-white text-center">
       {shoppingCart.length > 0 ? (
-        shoppingCartData
+        <>
+          {shoppingCartData}
+          <div className="m-auto mt-10 flex max-w-xs flex-col bg-slate-50 font-poppins">
+            <div className="text-2xl">Order Summary</div>
+            <div className="text-xl">Total: ${subTotal}</div>
+          </div>
+        </>
       ) : (
-        <h1>Your cart is empty!</h1>
+        <h1 className="font-poppins text-4xl">Your cart is empty!</h1>
       )}
     </div>
   );

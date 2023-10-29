@@ -16,7 +16,7 @@ export default function Shop() {
   }, []);
   return (
     <>
-      <div className="m-auto grid min-h-screen max-w-2xl grid-cols-3 items-center justify-items-center gap-2 bg-white">
+      <div className="grid min-h-screen max-w-2xl grid-cols-2 items-center justify-items-center gap-2 bg-white sm:m-auto md:grid-cols-3 lg:max-w-6xl lg:grid-cols-4 ">
         {shopItems.length < 1 ? (
           <h1>Loading...</h1>
         ) : (
