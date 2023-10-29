@@ -4,7 +4,8 @@ import { ShoppingCartContext } from "../Router";
 
 export default function NavBar() {
   const { shoppingCart } = useContext(ShoppingCartContext);
-  let [amountOfCartItems, setAmountOfCartItems] = useState(0);
+  const [amountOfCartItems, setAmountOfCartItems] = useState(0);
+  const [animationKey, setAnimationKey] = useState(false);
 
   useEffect(() => {
     let totalItems = 0;
@@ -12,6 +13,7 @@ export default function NavBar() {
       totalItems += value.quantity;
     });
     setAmountOfCartItems(totalItems);
+    setAnimationKey((prevKey) => !prevKey); // Increment the key to force re-render
   }, [shoppingCart]);
 
   return (
@@ -35,8 +37,13 @@ export default function NavBar() {
             className="w-10 transition-all hover:scale-110 hover:cursor-pointer"
           />
           {amountOfCartItems && amountOfCartItems > 0 ? (
-            <div className="absolute right-0 top-0 -translate-y-2 translate-x-2 rounded-xl bg-white p-0.5 font-oswald text-lg text-green-500">
-              {amountOfCartItems}
+            <div className="absolute right-0 top-0 -translate-y-2 translate-x-2">
+              <div
+                key={animationKey}
+                className="animate-bounceOnce rounded-xl bg-white p-0.5 font-oswald text-lg text-green-500"
+              >
+                {amountOfCartItems}
+              </div>
             </div>
           ) : null}
         </Link>
