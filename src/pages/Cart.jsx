@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ShoppingCartContext } from "../Router";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const {
@@ -65,9 +66,15 @@ export default function Cart() {
       {shoppingCart.length > 0 ? (
         <>
           {shoppingCartData}
-          <div className="m-auto mt-10 flex max-w-xs flex-col bg-slate-50 font-poppins">
+          <div className="m-auto mt-10 flex max-w-xs flex-col font-poppins">
             <div className="text-2xl">Order Summary</div>
             <div className="text-xl">Total: ${subTotal}</div>
+            <Link
+              className="m-8 mt-4 rounded-3xl bg-orange-400 p-4 transition-all hover:scale-110 hover:bg-orange-500"
+              to={"/"}
+            >
+              Complete Purchase
+            </Link>
           </div>
         </>
       ) : (
