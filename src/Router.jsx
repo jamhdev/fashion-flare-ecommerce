@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import { createContext, useEffect, useState } from "react";
+import AddedToCartNotificationModal from "./components/PurchaseNotificationModal";
 
 export const ShoppingCartContext = createContext();
 

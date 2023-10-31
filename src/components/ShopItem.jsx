@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ShoppingCartContext } from "../Router";
+import AddedToCartNotificationModal from "./PurchaseNotificationModal";
 
 export default function ShopItem({ image, title, price, rating, id }) {
   const {
@@ -10,6 +11,14 @@ export default function ShopItem({ image, title, price, rating, id }) {
   } = useContext(ShoppingCartContext);
 
   const itemInCart = shoppingCart.find((value) => value.id === id);
+  const [addedToCartModal, setAddedToCartModal] = useState(false);
+
+  const toggleAddedToCartModal = () => {
+    setAddedToCartModal(true);
+    setTimeout(() => {
+      setAddedToCartModal(false);
+    }, 500);
+  };
 
   return (
     <div className="flex h-full w-full flex-col justify-center p-4 transition-all hover:shadow-lg">
@@ -53,6 +62,7 @@ export default function ShopItem({ image, title, price, rating, id }) {
             alt="Buy Now"
             className="w-10 object-contain transition-all hover:scale-110 hover:cursor-pointer"
             onClick={() => {
+              toggleAddedToCartModal();
               addShoppingCartItem(id, title, price, image);
             }}
           />
@@ -63,11 +73,13 @@ export default function ShopItem({ image, title, price, rating, id }) {
           alt="Plus One"
           className="w-5 object-contain transition-all hover:scale-110 hover:cursor-pointer"
           onClick={() => {
+            toggleAddedToCartModal();
             addShoppingCartItem(id, title, price, image);
           }}
         />
       </div>
       <p className="truncate"></p>
+      {addedToCartModal ? <AddedToCartNotificationModal image={image} /> : null}
     </div>
   );
 }
