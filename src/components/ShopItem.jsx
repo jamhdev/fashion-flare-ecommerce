@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ShoppingCartContext } from "../Router";
+import { ShoppingCartContext } from "../ShoppingCart/context";
 import AddedToCartNotificationModal from "./AddedToCartNotificationModal";
 import { Link } from "react-router-dom";
 
@@ -54,7 +54,14 @@ export default function ShopItem({ image, title, price, rating, id }) {
           alt="Minus One"
           className="w-5 object-contain transition-all hover:scale-110 hover:cursor-pointer"
           onClick={() => {
-            removeShoppingCartItem(id, title, price, image);
+            removeShoppingCartItem(
+              id,
+              title,
+              price,
+              image,
+              shoppingCart,
+              setShoppingCart
+            );
           }}
         />
         {itemInCart && itemInCart.quantity > 0 ? (
@@ -66,7 +73,14 @@ export default function ShopItem({ image, title, price, rating, id }) {
             className="w-10 object-contain transition-all hover:scale-110 hover:cursor-pointer"
             onClick={() => {
               toggleAddedToCartModal();
-              addShoppingCartItem(id, title, price, image);
+              addShoppingCartItem(
+                id,
+                title,
+                price,
+                image,
+                shoppingCart,
+                setShoppingCart
+              );
             }}
           />
         )}
@@ -76,7 +90,14 @@ export default function ShopItem({ image, title, price, rating, id }) {
           className="w-5 object-contain transition-all hover:scale-110 hover:cursor-pointer"
           onClick={() => {
             toggleAddedToCartModal();
-            addShoppingCartItem(id, title, price, image);
+            addShoppingCartItem(
+              id,
+              title,
+              price,
+              image,
+              shoppingCart,
+              setShoppingCart
+            );
           }}
         />
       </div>

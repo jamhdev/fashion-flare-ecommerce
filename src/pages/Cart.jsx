@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ShoppingCartContext } from "../Router";
+import { ShoppingCartContext } from "../ShoppingCart/context";
 import { Link } from "react-router-dom";
 import currency from "currency.js";
 
@@ -36,7 +36,9 @@ export default function Cart() {
                       value.id,
                       value.title,
                       value.price,
-                      value.image
+                      value.image,
+                      shoppingCart,
+                      setShoppingCart
                     );
                   }}
                 />
@@ -50,7 +52,9 @@ export default function Cart() {
                       value.id,
                       value.title,
                       value.price,
-                      value.image
+                      value.image,
+                      shoppingCart,
+                      setShoppingCart
                     );
                   }}
                 />
@@ -62,7 +66,11 @@ export default function Cart() {
                   alt="trash icon"
                   className="ml-2 mr-2 w-5 cursor-pointer transition-all hover:scale-110"
                   onClick={() => {
-                    deleteAllOfSpecificItem(value.id);
+                    deleteAllOfSpecificItem(
+                      value.id,
+                      shoppingCart,
+                      setShoppingCart
+                    );
                   }}
                 />
               </div>

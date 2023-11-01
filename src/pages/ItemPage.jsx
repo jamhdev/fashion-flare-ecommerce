@@ -1,12 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ShoppingCartContext } from "../Router";
+import { ShoppingCartContext } from "../ShoppingCart/context";
 
 export default function ItemPage() {
   const { itemId } = useParams();
   const [itemData, setItemData] = useState(null);
-  const { addShoppingCartItem, removeShoppingCartItem, shoppingCart } =
-    useContext(ShoppingCartContext);
+  const {
+    addShoppingCartItem,
+    removeShoppingCartItem,
+    shoppingCart,
+    setShoppingCart,
+  } = useContext(ShoppingCartContext);
   const navigate = useNavigate();
   const [loadingState, setLoadingState] = useState(true);
   const [errorState, setErrorState] = useState(null);
@@ -99,7 +103,9 @@ export default function ItemPage() {
                       itemData.id,
                       itemData.title,
                       itemData.price,
-                      itemData.image
+                      itemData.image,
+                      shoppingCart,
+                      setShoppingCart
                     );
                   }
                 }}
@@ -115,7 +121,9 @@ export default function ItemPage() {
                           itemData.id,
                           itemData.title,
                           itemData.price,
-                          itemData.image
+                          itemData.image,
+                          shoppingCart,
+                          setShoppingCart
                         );
                       }}
                     />
@@ -131,7 +139,9 @@ export default function ItemPage() {
                           itemData.id,
                           itemData.title,
                           itemData.price,
-                          itemData.image
+                          itemData.image,
+                          shoppingCart,
+                          setShoppingCart
                         );
                       }}
                     />

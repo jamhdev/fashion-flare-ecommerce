@@ -8,68 +8,23 @@ import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ItemPage from "./pages/ItemPage";
-import currency from "currency.js";
-
-export const ShoppingCartContext = createContext();
+import { ShoppingCartContext } from "./ShoppingCart/context";
+import {
+  addShoppingCartItem,
+  removeShoppingCartItem,
+  deleteAllOfSpecificItem,
+  calculateSubTotal,
+} from "./ShoppingCart/actions";
 
 export default function Router() {
   const [shoppingCart, setShoppingCart] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
-    let total = currency(0);
-    shoppingCart.forEach((value) => {
-      total = total.add(value.price * value.quantity);
-    });
-    setSubTotal(total.value);
+    setSubTotal(calculateSubTotal(shoppingCart));
   }, [shoppingCart]);
-
-  const addShoppingCartItem = (id, title, price, image) => {
-    const isItemExists = shoppingCart.some((item) => item.id === id);
-    if (isItemExists) {
-      setShoppingCart((prev) => {
-        return prev.map((cartItem) => {
-          if (cartItem.id === id) {
-            return { ...cartItem, quantity: cartItem.quantity + 1 };
-          }
-          return cartItem;
-        });
-      });
-    } else {
-      setShoppingCart((prev) => {
-        const newState = [
-          ...prev,
-          { id: id, title: title, price: price, image: image, quantity: 1 },
-        ];
-        return newState;
-      });
-    }
-  };
-
-  const removeShoppingCartItem = (id, title, price, image) => {
-    const isItemExists = shoppingCart.some((item) => item.id === id);
-    if (isItemExists) {
-      setShoppingCart((prev) => {
-        return prev
-          .map((cartItem) => {
-            if (cartItem.id === id) {
-              if (cartItem.quantity === 1) {
-                return null; // Return null to filter out later
-              }
-              return { ...cartItem, quantity: cartItem.quantity - 1 };
-            }
-            return cartItem;
-          })
-          .filter(Boolean); // Filter out null values
-      });
-    }
-  };
-
-  const deleteAllOfSpecificItem = (id) => {
-    setShoppingCart((prev) => prev.filter((item) => item.id !== id));
-  };
 
   const router = createBrowserRouter([
     {
