@@ -76,7 +76,6 @@ export default function Router() {
     {
       path: "/",
       element: <MainLayout />,
-      errorElement: <Navigate to={"/"} />,
       children: [
         {
           index: true,
