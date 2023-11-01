@@ -53,7 +53,7 @@ export default function ItemPage() {
                   {")"}
                 </div>
               </div>
-              <div>
+              <div className="flex items-center justify-center">
                 <span>${itemData.price}</span>
                 <button
                   className="m-2 rounded-3xl bg-orange-400 p-4 font-poppins transition-all hover:scale-110 hover:bg-orange-500"
