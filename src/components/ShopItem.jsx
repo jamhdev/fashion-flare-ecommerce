@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { ShoppingCartContext } from "../Router";
-import AddedToCartNotificationModal from "./PurchaseNotificationModal";
+import AddedToCartNotificationModal from "./AddedToCartNotificationModal";
 import { Link } from "react-router-dom";
 
 export default function ShopItem({ image, title, price, rating, id }) {
