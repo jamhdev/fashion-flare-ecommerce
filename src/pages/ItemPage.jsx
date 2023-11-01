@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ShoppingCartContext } from "../Router";
 
 export default function ItemPage() {
@@ -7,6 +7,7 @@ export default function ItemPage() {
   const [itemData, setItemData] = useState(null);
   const { addShoppingCartItem, removeShoppingCartItem, shoppingCart } =
     useContext(ShoppingCartContext);
+  const navigate = useNavigate();
 
   const itemInCart =
     itemData && shoppingCart.find((value) => value.id === itemData.id);
@@ -16,14 +17,20 @@ export default function ItemPage() {
     fetch(`https://fakestoreapi.com/products/${itemId}`, {
       signal: controller.signal,
     })
-      .then((res) => res.json())
+      .then((res) => {
+        return res.json();
+      })
       .then((json) => {
         setItemData(json);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
+        navigate("/shop");
       });
-  }, []);
+
+    return () => controller.abort();
+  }, [itemId, navigate]);
+
   return (
     <>
       {itemData === null ? (

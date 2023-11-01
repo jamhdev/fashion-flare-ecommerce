@@ -8,7 +8,8 @@ export default function Shop() {
   const [jewelryFilterToggle, setJewelryFilterToggle] = useState(false);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    const controller = new AbortController();
+    fetch("https://fakestoreapi.com/products", { signal: controller.signal })
       .then((res) => res.json())
       .then((json) => {
         let defaultState = json.filter((item) => {
@@ -22,6 +23,8 @@ export default function Shop() {
       .catch((error) => {
         console.log(error);
       });
+
+    return () => controller.abort();
   }, []);
 
   const filteredItems = shopItems.filter((item) => {
