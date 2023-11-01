@@ -70,7 +70,6 @@ export default function ShopItem({ image, title, price, rating, id }) {
             }}
           />
         )}
-
         <img
           src="/images/icons/plus-icon.png"
           alt="Plus One"

@@ -10,6 +10,7 @@ export default function Cart() {
     addShoppingCartItem,
     removeShoppingCartItem,
     subTotal,
+    deleteAllOfSpecificItem,
   } = useContext(ShoppingCartContext);
 
   const shoppingCartData = shoppingCart.map((value, index) => {
@@ -54,7 +55,17 @@ export default function Cart() {
                   }}
                 />
               </div>
-              <div>${currency(value.price * value.quantity).value}</div>
+              <div className="flex">
+                <span>${currency(value.price * value.quantity).value}</span>
+                <img
+                  src="/images/icons/trash-icon.png"
+                  alt="trash icon"
+                  className="ml-2 mr-2 w-5 cursor-pointer transition-all hover:scale-110"
+                  onClick={() => {
+                    deleteAllOfSpecificItem(value.id);
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>

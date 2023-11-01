@@ -68,6 +68,10 @@ export default function Router() {
     }
   };
 
+  const deleteAllOfSpecificItem = (id) => {
+    setShoppingCart((prev) => prev.filter((item) => item.id !== id));
+  };
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -99,6 +103,7 @@ export default function Router() {
           setShoppingCart,
           addShoppingCartItem,
           removeShoppingCartItem,
+          deleteAllOfSpecificItem,
           subTotal,
         }}
       >
