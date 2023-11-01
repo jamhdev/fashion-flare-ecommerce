@@ -10,6 +10,7 @@ import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import { createContext, useEffect, useState } from "react";
 import AddedToCartNotificationModal from "./components/PurchaseNotificationModal";
+import ItemPage from "./pages/ItemPage";
 
 export const ShoppingCartContext = createContext();
 
@@ -76,11 +77,15 @@ export default function Router() {
           element: <Navigate to={"home"} />,
         },
         { path: "home", element: <Home /> },
-        { path: "shop", element: <Shop /> },
+        {
+          path: "shop",
+          element: <Shop />,
+        },
         {
           path: "cart",
           element: <Cart />,
         },
+        { path: "shop/:itemId", element: <ItemPage /> },
       ],
     },
   ]);

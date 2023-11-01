@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { ShoppingCartContext } from "../Router";
 import AddedToCartNotificationModal from "./PurchaseNotificationModal";
+import { Link } from "react-router-dom";
 
 export default function ShopItem({ image, title, price, rating, id }) {
   const {
@@ -22,11 +23,13 @@ export default function ShopItem({ image, title, price, rating, id }) {
 
   return (
     <div className="flex h-full w-full flex-col justify-center p-4 transition-all hover:shadow-lg">
-      <img
-        src={image}
-        alt={title}
-        className="h-52 object-contain hover:cursor-pointer "
-      />
+      <Link to={`${id}`} className="flex items-center justify-center">
+        <img
+          src={image}
+          alt={title}
+          className="h-52 object-contain hover:cursor-pointer "
+        />
+      </Link>
       <p className="truncate font-poppins">{title}</p>
 
       <div className="flex justify-between truncate font-oswald">
