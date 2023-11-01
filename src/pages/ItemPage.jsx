@@ -35,7 +35,7 @@ export default function ItemPage() {
       });
 
     return () => controller.abort();
-  }, [itemId, navigate]);
+  }, [itemId]);
 
   if (loadingState) {
     return (
