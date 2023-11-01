@@ -11,6 +11,7 @@ import Shop from "./pages/Shop";
 import { createContext, useEffect, useState } from "react";
 import AddedToCartNotificationModal from "./components/PurchaseNotificationModal";
 import ItemPage from "./pages/ItemPage";
+import currency from "currency.js";
 
 export const ShoppingCartContext = createContext();
 
@@ -19,11 +20,11 @@ export default function Router() {
   const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
-    let total = 0;
+    let total = currency(0);
     shoppingCart.forEach((value) => {
-      total += value.price * value.quantity;
+      total = total.add(value.price * value.quantity);
     });
-    setSubTotal(total);
+    setSubTotal(total.value);
   }, [shoppingCart]);
 
   const addShoppingCartItem = (id, title, price, image) => {

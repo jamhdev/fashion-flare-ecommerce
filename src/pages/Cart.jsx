@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ShoppingCartContext } from "../Router";
 import { Link } from "react-router-dom";
+import currency from "currency.js";
 
 export default function Cart() {
   const {
@@ -53,7 +54,7 @@ export default function Cart() {
                   }}
                 />
               </div>
-              <div>${value.price * value.quantity}</div>
+              <div>${currency(value.price * value.quantity).value}</div>
             </div>
           </div>
         </div>

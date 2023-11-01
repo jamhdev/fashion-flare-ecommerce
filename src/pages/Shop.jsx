@@ -50,7 +50,7 @@ export default function Shop() {
               checked={mensFilterToggle}
               onChange={() => setMensFilterToggle((prev) => !prev)}
             />
-            <span className="pl-1">Mens</span>
+            <span className="pl-1">Men's</span>
           </label>
           <label>
             <input
@@ -58,7 +58,7 @@ export default function Shop() {
               checked={womansFilterToggle}
               onChange={() => setWomansFilterToggle((prev) => !prev)}
             />
-            <span className="pl-1">Women</span>
+            <span className="pl-1">Women's</span>
           </label>
           <label>
             <input
