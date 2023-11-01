@@ -6,6 +6,8 @@ export default function Shop() {
   const [mensFilterToggle, setMensFilterToggle] = useState(false);
   const [womansFilterToggle, setWomansFilterToggle] = useState(false);
   const [jewelryFilterToggle, setJewelryFilterToggle] = useState(false);
+  const [loadingState, setLoadingState] = useState(true);
+  const [errorState, setErrorState] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -22,6 +24,10 @@ export default function Shop() {
       })
       .catch((error) => {
         console.log(error);
+        setErrorState(error);
+      })
+      .finally(() => {
+        setLoadingState(false);
       });
 
     return () => controller.abort();
@@ -42,6 +48,33 @@ export default function Shop() {
     ) : (
       filteredItems.map((item, index) => <ShopItem key={index} {...item} />)
     );
+
+  if (loadingState) {
+    return (
+      <>
+        <div className="flex h-52 items-center justify-center">
+          <img
+            src="/images/icons/loading-icon.png"
+            alt="loading-icon"
+            className="w-20 max-w-full animate-spin"
+          />
+        </div>
+      </>
+    );
+  }
+  if (errorState) {
+    return (
+      <>
+        <div className="flex h-screen items-center justify-center">
+          <img
+            src="/images/icons/error404-icon.png"
+            alt="error icon"
+            className="w-72 max-w-full"
+          />
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
