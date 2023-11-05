@@ -17,10 +17,11 @@ import {
   deleteAllOfSpecificItem,
   calculateSubTotal,
 } from "./ShoppingCart/actions";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 export default function Router() {
-  const [shoppingCart, setShoppingCart] = useState([]);
   const [subTotal, setSubTotal] = useState(0);
+  const [shoppingCart, setShoppingCart] = useLocalStorage("shoppingCart");
 
   useEffect(() => {
     setSubTotal(calculateSubTotal(shoppingCart));
