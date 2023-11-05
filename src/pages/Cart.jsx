@@ -17,11 +17,13 @@ export default function Cart() {
     return (
       <React.Fragment key={index}>
         <div className="m-auto flex max-w-2xl rounded-lg p-2 font-poppins shadow-md">
-          <img
-            src={value.image}
-            alt="Item Image"
-            className="max-h-20 object-contain"
-          />
+          <Link to={`/shop/${value.id}`}>
+            <img
+              src={value.image}
+              alt="Item Image"
+              className="h-24 w-24 object-contain"
+            />
+          </Link>
 
           <div className="flex flex-grow flex-col pl-2">
             <div className="text-left">{value.title}</div>
@@ -92,6 +94,15 @@ export default function Cart() {
             <Link
               className="m-8 mt-4 rounded-3xl bg-orange-400 p-4 transition-all hover:scale-110 hover:bg-orange-500"
               to={"/"}
+              onClick={() => {
+                shoppingCart.forEach((element) => {
+                  deleteAllOfSpecificItem(
+                    element.id,
+                    shoppingCart,
+                    setShoppingCart
+                  );
+                });
+              }}
             >
               Complete Purchase
             </Link>
