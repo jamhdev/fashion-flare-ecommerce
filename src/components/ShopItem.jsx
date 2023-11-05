@@ -49,21 +49,23 @@ export default function ShopItem({ image, title, price, rating, id }) {
         </div>
       </div>
       <div className="relative flex justify-center">
-        <img
-          src="/images/icons/minus-icon.png"
-          alt="Minus One"
-          className="w-5 object-contain transition-all hover:scale-110 hover:cursor-pointer"
-          onClick={() => {
-            removeShoppingCartItem(
-              id,
-              title,
-              price,
-              image,
-              shoppingCart,
-              setShoppingCart
-            );
-          }}
-        />
+        {itemInCart && itemInCart.quantity > 0 ? (
+          <img
+            src="/images/icons/minus-icon.png"
+            alt="Minus One"
+            className="w-5 object-contain transition-all hover:scale-110 hover:cursor-pointer"
+            onClick={() => {
+              removeShoppingCartItem(
+                id,
+                title,
+                price,
+                image,
+                shoppingCart,
+                setShoppingCart
+              );
+            }}
+          />
+        ) : null}
         {itemInCart && itemInCart.quantity > 0 ? (
           <div className="m-1 font-oswald text-2xl">{itemInCart.quantity}</div>
         ) : (
@@ -84,22 +86,25 @@ export default function ShopItem({ image, title, price, rating, id }) {
             }}
           />
         )}
-        <img
-          src="/images/icons/plus-icon.png"
-          alt="Plus One"
-          className="w-5 object-contain transition-all hover:scale-110 hover:cursor-pointer"
-          onClick={() => {
-            toggleAddedToCartModal();
-            addShoppingCartItem(
-              id,
-              title,
-              price,
-              image,
-              shoppingCart,
-              setShoppingCart
-            );
-          }}
-        />
+
+        {itemInCart && itemInCart.quantity > 0 ? (
+          <img
+            src="/images/icons/plus-icon.png"
+            alt="Plus One"
+            className="w-5 object-contain transition-all hover:scale-110 hover:cursor-pointer"
+            onClick={() => {
+              toggleAddedToCartModal();
+              addShoppingCartItem(
+                id,
+                title,
+                price,
+                image,
+                shoppingCart,
+                setShoppingCart
+              );
+            }}
+          />
+        ) : null}
       </div>
       <p className="truncate"></p>
       {addedToCartModal ? <AddedToCartNotificationModal image={image} /> : null}
