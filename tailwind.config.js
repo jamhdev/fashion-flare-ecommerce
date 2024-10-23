@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         oswald: ["Oswald", "sans-serif"],
+        colors: {
+          primaryBackground: "#f9fafb",
+        },
       },
       keyframes: {
         bounceOnce: {

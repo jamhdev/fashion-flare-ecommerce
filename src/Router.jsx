@@ -8,25 +8,12 @@ import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
-import { useEffect, useState } from "react";
 import ItemPage from "./pages/ItemPage";
-import { ShoppingCartContext } from "./ShoppingCart/context";
-import {
-  addShoppingCartItem,
-  removeShoppingCartItem,
-  deleteAllOfSpecificItem,
-  calculateSubTotal,
-} from "./ShoppingCart/actions";
-import useLocalStorage from "./hooks/useLocalStorage";
+import { useContext, useEffect } from "react";
+import AppContextProvider, { AppContext } from "./contexts/AppContextProvider";
+import Footer from "./components/Footer";
 
 export default function Router() {
-  const [subTotal, setSubTotal] = useState(0);
-  const [shoppingCart, setShoppingCart] = useLocalStorage("shoppingCart");
-
-  useEffect(() => {
-    setSubTotal(calculateSubTotal(shoppingCart));
-  }, [shoppingCart]);
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -53,27 +40,26 @@ export default function Router() {
 
   return (
     <>
-      <ShoppingCartContext.Provider
-        value={{
-          shoppingCart,
-          setShoppingCart,
-          addShoppingCartItem,
-          removeShoppingCartItem,
-          deleteAllOfSpecificItem,
-          subTotal,
-        }}
-      >
+      <AppContextProvider>
         <RouterProvider router={router} />
-      </ShoppingCartContext.Provider>
+      </AppContextProvider>
     </>
   );
 }
 
 const MainLayout = () => {
+  const { calculateSubTotal, shoppingCart, setSubTotal } =
+    useContext(AppContext);
+
+  useEffect(() => {
+    setSubTotal(calculateSubTotal(shoppingCart));
+  }, [shoppingCart]);
+
   return (
-    <>
+    <div className="bg-primaryBackground m-auto max-w-7xl">
       <NavBar />
       <Outlet />
-    </>
+      <Footer />
+    </div>
   );
 };
