@@ -1,6 +1,6 @@
-# Fashion E-Commerce App
+# Fashion Flare
 
-Welcome to the Fashion E-Commerce App, a modern, responsive online store specializing in men's, women's, and jewelry collections. This app offers a seamless shopping experience with dynamic product pages, persistent shopping cart data, and real-time data updates.
+Welcome to Fashion Flare, a modern, responsive online store specializing in men's, women's, and jewelry collections. This app offers a seamless shopping experience with dynamic product pages, persistent shopping cart data, and real-time data updates.
 
 ## Features
 
